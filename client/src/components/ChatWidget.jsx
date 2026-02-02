@@ -41,7 +41,7 @@ const ChatWidget = () => {
         setIsTyping(true);
 
         try {
-            const res = await axios.post('http://localhost:5000/api/chat', { message: text });
+            const res = await axios.post('/api/chat', { message: text });
 
             // Artificial delay for better UX is handled in backend, but just in case
             setTimeout(() => {
