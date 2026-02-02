@@ -25,6 +25,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve static files from the React app
+// In Vercel, static files are handled by the 'rewrites' in vercel.json
+// But we keep this for local production testing
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/', (req, res) => {
@@ -48,6 +50,10 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/antigravity
     });
 
 // Start Server independently of DB
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+export default app;
