@@ -1,0 +1,10 @@
+{
+  "name": "rymec-monorepo",
+  "version": "1.0.0",
+  "description": "RYMEC Project",
+  "scripts": {
+    "start": "cd server && node server.js",
+    "build": "cd client && npm install && npm run build",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+  }
+}

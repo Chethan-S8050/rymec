@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
@@ -19,8 +21,20 @@ app.use('/api/auth', authRoutes);
 import { processMessage } from './controllers/chatController.js';
 app.post('/api/chat', processMessage);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
 app.get('/', (req, res) => {
     res.send('Antigravity API is running');
+});
+
+// For any other request, send back the index.html from dist
+app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) return res.status(404).json({ message: 'API route not found' });
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 // Database Connection
