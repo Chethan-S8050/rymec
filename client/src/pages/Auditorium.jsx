@@ -1,0 +1,139 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const Auditorium = () => {
+    const facilities = [
+        { name: "ICT", href: "/ict" },
+        { name: "Auditorium", href: "/auditorium", active: true },
+        { name: "Sports", href: "/sports" },
+        { name: "Medical Centre", href: "/medical-centre" },
+        { name: "Hostel", href: "/hostel" },
+        { name: "Transport", href: "/transport" },
+        { name: "Bank", href: "/bank" }
+    ];
+
+    const auditoriumImages = [
+        { url: "https://rymec.edu.in/wp-content/uploads/2023/02/img7.jpeg", alt: "RYMEC Auditorium Interior" }
+    ];
+
+    return (
+        <div className="min-h-screen pt-20 pb-10 bg-gray-50 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                    className="absolute -top-24 -left-24 w-96 h-96 bg-cu-blue/5 rounded-[40%] blur-3xl"
+                />
+            </div>
+
+            <div className="bg-cu-blue text-white py-20 relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/20"></div>
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mb-4 inline-block px-4 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold tracking-[0.2em] uppercase"
+                    >
+                        Facilities
+                    </motion.div>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-4xl md:text-5xl font-bold font-display mb-6 tracking-tight uppercase"
+                    >
+                        Auditorium
+                    </motion.h1>
+                    <div className="w-24 h-1.5 bg-cu-gold mx-auto rounded-full"></div>
+                </div>
+            </div>
+
+            <div className="bg-white border-b border-gray-100 py-4">
+                <div className="container mx-auto px-4 md:px-8">
+                    <nav className="flex text-sm font-medium text-gray-500">
+                        <a href="/" className="hover:text-cu-blue transition-colors">Home</a>
+                        <span className="mx-2">/</span>
+                        <span className="text-cu-blue">Auditorium</span>
+                    </nav>
+                </div>
+            </div>
+
+            <div className="container mx-auto px-4 md:px-8 py-12 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <div className="lg:col-span-2 space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 md:p-12"
+                        >
+                            <div className="space-y-4 mb-10">
+                                <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Well-Equipped Convention Hall</h2>
+                                <div className="w-16 h-1 bg-cu-gold"></div>
+                                <p className="text-gray-600 leading-relaxed text-lg">
+                                    RYMEC has a well-equipped auditorium with a seating capacity of over 1000 people. A regular venue for conferences, workshops and seminars, this auditorium has all the facilities to enhance the learning process.
+                                </p>
+                                <p className="text-gray-600 leading-relaxed">
+                                    Our 1000 seater Convention Hall, which is a venue for conferences and seminars, is a vast space that serves the varied requirements of quality education. While it is often utilized for cultural activities, sporting activities and other games also use to be organized here.
+                                </p>
+                            </div>
+
+                            <div className="space-y-10 mt-12">
+                                {auditoriumImages.map((img, idx) => (
+                                    <motion.div
+                                        key={idx}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: idx * 0.1 }}
+                                        className="group relative rounded-2xl overflow-hidden shadow-lg border border-gray-100"
+                                    >
+                                        <img
+                                            src={img.url}
+                                            alt={img.alt}
+                                            className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                            <p className="text-white font-bold text-lg">{img.alt}</p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                                <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                                    <h3 className="text-xl font-bold text-cu-blue mb-2">Seating Capacity</h3>
+                                    <p className="text-gray-700 font-medium">1000+ Guests</p>
+                                </div>
+                                <div className="bg-gold-50 p-6 rounded-2xl border border-gold-100">
+                                    <h3 className="text-xl font-bold text-cu-gold mb-2">Primary Use</h3>
+                                    <p className="text-gray-700 font-medium">Conferences, Workshops, Seminars & Cultural Events</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    <div className="space-y-8">
+                        <div className="bg-white rounded-3xl shadow-lg shadow-gray-200/50 border border-gray-100 p-8">
+                            <h4 className="text-xl font-bold text-gray-800 mb-6 border-b pb-4 tracking-tight">Campus Facilities</h4>
+                            <ul className="space-y-3">
+                                {facilities.map((item, idx) => (
+                                    <li key={idx}>
+                                        <a
+                                            href={item.href}
+                                            className={`block p-4 rounded-xl font-semibold transition-all duration-300 ${item.active
+                                                ? "bg-cu-blue text-white shadow-lg shadow-blue-900/20 translate-x-2"
+                                                : "text-gray-600 hover:bg-gray-50 hover:text-cu-blue hover:translate-x-1"
+                                                }`}
+                                        >
+                                            {item.name}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Auditorium;
